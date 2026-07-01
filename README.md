@@ -20,6 +20,25 @@ base model `deepseek-ai/DeepSeek-V4-Flash-DSpark`).
 
 ---
 
+## Key optimizations
+
+Full engineering writeup: **[`docs/OPTIMIZATIONS.md`](docs/OPTIMIZATIONS.md)** · full data: **[`benchmarks/RESULTS.md`](benchmarks/RESULTS.md)**
+
+- **1.5M context + KV token-pool optimization** — `nvfp4_ds_mla` 4-bit KV + util 0.85 →
+  **3,231,736-token pool** (≈7.7 KB/token; util is the lever, `max_num_seqs` barely moves it).
+- **Custom sm_121a (GB10) patches** — NVFP4 dtype stages + a vLLM **0.24.0** compiled sparse-MLA
+  port with two GB10 fixes (dual-cache split-K scratch, `out_lse` head-sizing contiguity).
+- **Keys concurrency patches** — stable req-id KV slotting + ragged context path; unlocks
+  `max_num_seqs>1` (stock DSpark is single-sequence) → correct C=12 concurrency, byte-identical under churn.
+- **Acceptance >60%** — DSpark `MTP=5` + compiled draft/MHC + warmup → **61–67%** (shallow per-position decay).
+- **`WO_PROJECTION=1`** — sustains **67% acceptance at concurrency** (vs 58% at WO=0); we value
+  sustained acceptance over raw single-stream speed at high load.
+- **Context sweep** — decode **flat ~47–50 tok/s** across context; only TTFT (prefill) grows.
+- **Concurrency sweep** — C1 51 → **C12 255 tok/s** aggregate (this config); ~318 @C16 on seqs=16.
+- **Long-context** — coherent needle recall to **543,994 tokens**, no garble.
+
+---
+
 ## Standing configuration
 
 | Parameter | Value |
