@@ -13,6 +13,11 @@ full results, and the vLLM 0.24.0 sparse-MLA port fix). The upstream serving ove
 **not** redistributed here — see [`docs/BUILD.md`](docs/BUILD.md) for how to build the image
 from its upstream sources, with credit.
 
+📦 **Model / recipe card on Hugging Face:**
+[`drowzeys/DeepSeek-V4-Flash-DSpark-NVFP4-KV-1.5M-CTX-2xDGX-Spark`](https://huggingface.co/drowzeys/DeepSeek-V4-Flash-DSpark-NVFP4-KV-1.5M-CTX-2xDGX-Spark)
+— includes the launcher, benchmarks, and a two-command download-and-serve guide (pulls the
+base model `deepseek-ai/DeepSeek-V4-Flash-DSpark`).
+
 ---
 
 ## Standing configuration
@@ -107,3 +112,13 @@ docs/
 
 See [`NOTICE`](NOTICE). This repo distributes original launcher/benchmark/port artifacts and
 build instructions — not the upstream overlay sources.
+
+## Support / Donations
+
+If this frontier work is useful to you, donations are appreciated and help fund more
+open GB10 / DGX Spark serving research:
+
+- **Solana:** `drkeys.sol`
+
+Thank you 🙏
+
