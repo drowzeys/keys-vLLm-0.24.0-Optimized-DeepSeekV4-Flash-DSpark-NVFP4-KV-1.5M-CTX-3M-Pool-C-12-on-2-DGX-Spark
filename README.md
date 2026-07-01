@@ -56,9 +56,21 @@ Full tables: **[`benchmarks/RESULTS.md`](benchmarks/RESULTS.md)**.
 
 ---
 
+## Model
+
+This recipe serves the **stock** base model (unmodified — NVFP4 is a runtime KV-cache setting):
+
+- **[`deepseek-ai/DeepSeek-V4-Flash-DSpark`](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-DSpark)**
+
+```bash
+hf download deepseek-ai/DeepSeek-V4-Flash-DSpark --local-dir ./DeepSeek-V4-Flash-DSpark
+```
+
 ## Quickstart
 
 ```bash
+# 0. Get the stock model (above), point the launcher's model path at it.
+
 # 1. Build the serving image (see docs/BUILD.md for the upstream stage chain)
 #    -> vllm-dspark-runtime:dspark-nvfp4-stage-c on both nodes
 
