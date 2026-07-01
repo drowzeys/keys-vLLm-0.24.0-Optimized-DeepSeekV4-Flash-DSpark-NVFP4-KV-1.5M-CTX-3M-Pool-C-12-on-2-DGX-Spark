@@ -1,0 +1,18 @@
+Keys — vLLM 0.24.0-Optimized DeepSeek-V4-Flash-DSpark NVFP4-KV 1.5M-CTX recipe
+Copyright 2026 drowzeys
+
+This product includes software developed by the vLLM project
+(https://github.com/vllm-project/vllm), licensed under Apache-2.0.
+
+The serving stack and patched source lines are derivatives of / build upon:
+ - vLLM (Apache-2.0)
+ - Rafael Caricio's DSpark vLLM integration (rafaelcaricio/vllm)
+ - aidendle94's GB10 sparkrun-vllm-ds4 runtime base
+ - DSpark packaging by MiaAI-Lab and tonyd2wild
+ - the nvfp4_ds_mla KV-cache stage recipe (tonyd2wild)
+ - deepseek-ai/DeepSeek-V4-Flash-DSpark (the model)
+
+This repository distributes ONLY original artifacts — the serving launcher,
+GPU-clear/ops tooling, an independent benchmark harness with results, and the
+vLLM 0.24.0 sparse-MLA port drop-in (flashinfer_sparse_mla.py) — plus build
+instructions. It does NOT redistribute the upstream overlay sources or model weights.
