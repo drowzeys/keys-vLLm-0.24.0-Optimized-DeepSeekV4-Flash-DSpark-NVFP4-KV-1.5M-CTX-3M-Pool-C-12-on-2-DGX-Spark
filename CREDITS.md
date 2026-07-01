@@ -21,6 +21,26 @@ projects. **Special thanks** — this repo builds directly on top of their contr
 - **vLLM** (the vLLM project) — the inference engine everything runs on. Licensed under
   Apache-2.0. → https://github.com/vllm-project/vllm
 
+## ⭐ Transplant components (vLLM 0.24.0 port)
+
+The `vllm-0.24-port/` work transplants and wraps kernels authored by others. Full credit to
+their original creators:
+
+- **aidendle94** — the **compiled flashinfer `sparse_mla_sm120_decode_dsv4`** kernel (patched
+  flashinfer 0.6.12) and the **DeepGEMM sm_121a** build, both transplanted from the
+  `sparkrun-vllm-ds4-gb10` runtime into the 0.24.0 port. Our `flashinfer_sparse_mla.py` is a
+  thin drop-in **wrapper around aidendle94's kernel** — the kernel itself is aidendle94's work.
+- **CosmicRaisins** — the Triton sparse-MLA implementation that the port's `sm12x` byte-exact
+  sparse-MLA path derives from (the fallback used before the compiled kernel was wired in).
+- **hazyumps** — the GB10 `sm12x` indexer / DeepGEMM fallbacks
+  (`deepseek-v4-flash-gb10`) referenced and used during the port.
+- **Rafael Caricio** — the DSpark proposer / overlay whose draft path the port grafts onto
+  stock vLLM 0.24.0.
+
+Only the two integration fixes (the dual-cache `mid_out` split-count and the `out_lse`
+head-sizing contiguity fix) and the env-gated wrapper are original to this repo; the kernels
+they drive are the above authors' work.
+
 ## Also
 
 - **aidendle94** — the GB10 (sm_121a) `sparkrun-vllm-ds4` runtime base image carrying the
