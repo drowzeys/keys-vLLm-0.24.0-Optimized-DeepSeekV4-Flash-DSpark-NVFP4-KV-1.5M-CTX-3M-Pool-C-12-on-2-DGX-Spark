@@ -12,7 +12,16 @@ The serving stack and patched source lines are derivatives of / build upon:
  - the nvfp4_ds_mla KV-cache stage recipe (tonyd2wild)
  - deepseek-ai/DeepSeek-V4-Flash-DSpark (the model)
 
-This repository distributes ONLY original artifacts — the serving launcher,
+The GitHub repository distributes ONLY original artifacts — the serving launcher,
 GPU-clear/ops tooling, an independent benchmark harness with results, and the
 vLLM 0.24.0 sparse-MLA port drop-in (flashinfer_sparse_mla.py) — plus build
-instructions. It does NOT redistribute the upstream overlay sources or model weights.
+instructions. It does NOT redistribute the upstream overlay SOURCES or model weights.
+
+The published container image (ghcr.io/drowzeys/dspark-nvfp4-stage-c) is a
+convenience build for reproduction. It is layered on top of aidendle94's
+GB10 sparkrun-vllm-ds4 runtime base and therefore includes upstream COMPILED
+layers (aidendle94's patched flashinfer / DeepGEMM kernels, Rafael Caricio's
+DSpark overlay). These are redistributed here with credit, under their
+respective upstream licenses; all attribution is in CREDITS.md. If any upstream
+author prefers the image not be redistributed, open an issue and it will be
+removed and replaced with the docs/BUILD.md build-from-source path.
